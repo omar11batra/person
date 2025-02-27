@@ -1,17 +1,20 @@
-import os
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
 
-# الحصول على التوكن من متغيرات البيئة
-TOKEN = os.getenv("7767534790:AAGHSlDN7fUQhZUMX8nWs7hTWpVl7w0ni90")
+# ضع التوكن الخاص بك هنا
+TOKEN = "7767534790:AAGHSlDN7fUQhZUMX8nWs7hTWpVl7w0ni90"
 
-def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text("مرحبًا! أنا بوت المسافر عبر الزمن، لقد تم تطويري بواسطة م/ عمر عبدالعزيز، اسألني عن أي شخصية تاريخية.")
+# إنشاء التطبيق باستخدام التوكن
+app = Application.builder().token(TOKEN).build()
 
-updater = Updater(TOKEN)
-dp = updater.dispatcher
+# دالة الرد على الأوامر
+async def start(update: Update, context: CallbackContext):
+    await update.message.reply_text("مرحبًا! أنا بوت المسافر عبر الزمن، لقد تم تطويري بواسطة م/ عمر عبدالعزيز، اسألني عن أي شخصية تاريخية")
 
-dp.add_handler(CommandHandler("start", start))
+# إضافة معالج للأوامر
+app.add_handler(CommandHandler("start", start))
 
-updater.start_polling()
-updater.idle()
+# تشغيل البوت
+if __name__ == "__main__":
+    print("البوت يعمل الآن...")
+    app.run_polling()
