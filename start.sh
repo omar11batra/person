@@ -1,3 +1,3 @@
 #!/bin/bash
-source /opt/venv/bin/activate
+source venv/Scripts/activate
 python bot.py
